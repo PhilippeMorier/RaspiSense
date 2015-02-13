@@ -1,0 +1,24 @@
+{
+  "name": "RaspiSense",
+  "version": "0.0.0",
+  "description": "Uses different sensors to retreive temperatur, light, pressure and humidity and provides a REST API.",
+  "main": "index.js",
+  "dependencies": {
+    "restify": "^2.8.5",
+    "mongoose": "^3.8.23"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sensor",
+    "temperatur",
+    "leight",
+    "pressure",
+    "humidity",
+    "REST"
+  ],
+  "author": "Thorgal Hayne",
+  "license": "ISC"
+}
