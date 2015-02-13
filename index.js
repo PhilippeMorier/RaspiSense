@@ -1,27 +1,45 @@
-var Measurement = require('./schemas/measurementSchema');
-var Sensor = require('./schemas/sensorSchema');
-var MeasurementService = require('./services/measurementService');
+var Measurement = require('./models/measurementModel');
+var Sensor = require('./models/sensorModel');
+var LightMeasurementService = require('./services/lightMeasurementService');
 var RoutingService = require('./services/routingService');
 
-var newMeasurement = new Measurement({
-	measurementEntries: [
-		{
-			typeLabel: 'Temperatur',
-			value: 21.2,
-			unit: '°C',
-			sensorId: 1
-		},
-		
-	]
-});
+var isWindowsPlatform = /^win/.test(process.platform);
+LightSensor = isWindowsPlatform ? require('./sensors/lightSensorMock') : require('./sensors/lightSensor');
 
-var newSensor = new Sensor({
-	name: 'DHT22',
-	description: 'Temperature and Humidity Sensor.'
-});
+var lightSensor = new LightSensor();
+var lightMeasurementService;
 
-var measurementService = new MeasurementService({ connection: 'okay' });
-measurementService.saveMeasurement({ measurement: '23°C' });
+if (lightSensor.initialize()) {
+    lightMeasurementService = new LightMeasurementService(lightSensor);
+}
 
-var routingService = new RoutingService(measurementService);
-routingService.initialize();
+if (lightMeasurementService) {
+    lightMeasurementService.takeMeasurement(function (measurement) {
+        console.log(measurement);
+    });
+}
+
+/*
+ var newMeasurement = new Measurement({
+ measurementEntries: [
+ {
+ typeLabel: 'Temperatur',
+ value: 21.2,
+ unit: 'Â°C',
+ sensorId: 1
+ },
+
+ ]
+ });
+
+ var newSensor = new Sensor({
+ name: 'DHT22',
+ description: 'Temperature and Humidity Sensor.'
+ });
+
+ var measurementService = new MeasurementService({connection: 'okay'});
+ measurementService.saveMeasurement({measurement: '23Â°C'});
+
+ var routingService = new RoutingService(measurementService);
+ routingService.initialize();
+ */
