@@ -1,2 +1,5 @@
-# ignore node_modules
 node_modules/
+*.lock
+db/journal/
+*.ns
+*.0

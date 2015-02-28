@@ -1,11 +1,11 @@
 {
   "name": "RaspiSense",
   "version": "0.0.0",
-  "description": "Uses different sensors to retreive temperatur, light, pressure and humidity and provides a REST API.",
+  "description": "Uses different sensors to retrieve temperatur, light, pressure and humidity and provides a REST API.",
   "main": "index.js",
   "dependencies": {
-    "restify": "^2.8.5",
-    "mongoose": "^3.8.23"
+    "mongoose": "^3.8.24",
+    "restify": "^2.8.5"
   },
   "devDependencies": {},
   "scripts": {

@@ -2,6 +2,10 @@ function LightSensor() {
 }
 
 LightSensor.prototype.initialize = function () {
+
+};
+
+LightSensor.prototype.isInitialized = function () {
     return true;
 };
 

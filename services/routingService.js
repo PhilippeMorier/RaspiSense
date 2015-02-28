@@ -25,7 +25,7 @@ var routingService = function () {
 		
 		server.post('/measurements', function (req, res, next) {
 			res.send(req.params);
-			measurementService.takeMeasurement();
+			measurementService.readSensorValue();
 			return next();
 		});
 		 

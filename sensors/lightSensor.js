@@ -1,6 +1,7 @@
 var BH1750 = require('bh1750');
 
 function LightSensor() {
+    this._isInitialized = false;
 }
 
 LightSensor.prototype.initialize = function () {
@@ -14,10 +15,14 @@ LightSensor.prototype.initialize = function () {
     }
     catch (error) {
         console.log(error);
-        return false;
+        this._isInitialized = false;
     }
 
-    return true;
+    this._isInitialized = true;
+};
+
+LightSensor.prototype.isInitialized = function () {
+    return this._isInitialized;
 };
 
 LightSensor.prototype.read = function (callback) {

@@ -1,45 +1,30 @@
-var Measurement = require('./models/measurementModel');
-var Sensor = require('./models/sensorModel');
-var LightMeasurementService = require('./services/lightMeasurementService');
-var RoutingService = require('./services/routingService');
-
+var mongoose = require('mongoose');
+var LightSensorService = require('./services/lightSensorService');
+var MeasurementRepository = require('./repositories/measurementRepository');
 var isWindowsPlatform = /^win/.test(process.platform);
-LightSensor = isWindowsPlatform ? require('./sensors/lightSensorMock') : require('./sensors/lightSensor');
+var LightSensor = isWindowsPlatform ? require('./sensors/lightSensorMock') : require('./sensors/lightSensor');
+
+mongoose.connect('mongodb://localhost:8910/RaspiSenseDatabase', function (error) {
+    if (error) {
+        throw error;
+    }
+});
 
 var lightSensor = new LightSensor();
-var lightMeasurementService;
+lightSensor.initialize();
 
-if (lightSensor.initialize()) {
-    lightMeasurementService = new LightMeasurementService(lightSensor);
+if (lightSensor.isInitialized()) {
+
+    var lightSensorService = new LightSensorService(lightSensor);
+    var lightMeasurementRepository = new MeasurementRepository();
+
+    if (lightSensorService) {
+
+        lightSensorService.readSensorValue(function (sensorValue) {
+            console.log(sensorValue);
+            lightMeasurementRepository.saveMeasurement(sensorValue);
+        });
+    }
 }
 
-if (lightMeasurementService) {
-    lightMeasurementService.takeMeasurement(function (measurement) {
-        console.log(measurement);
-    });
-}
-
-/*
- var newMeasurement = new Measurement({
- measurementEntries: [
- {
- typeLabel: 'Temperatur',
- value: 21.2,
- unit: '°C',
- sensorId: 1
- },
-
- ]
- });
-
- var newSensor = new Sensor({
- name: 'DHT22',
- description: 'Temperature and Humidity Sensor.'
- });
-
- var measurementService = new MeasurementService({connection: 'okay'});
- measurementService.saveMeasurement({measurement: '23°C'});
-
- var routingService = new RoutingService(measurementService);
- routingService.initialize();
- */
+mongoose.connection.close();
