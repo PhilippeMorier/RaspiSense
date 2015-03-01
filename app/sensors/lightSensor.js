@@ -1,3 +1,5 @@
+'use strict';
+
 var BH1750 = require('bh1750');
 
 function LightSensor() {

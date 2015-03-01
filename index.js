@@ -1,8 +1,10 @@
+'use strict';
+
 var mongoose = require('mongoose');
-var LightSensorService = require('./services/lightSensorService');
-var MeasurementRepository = require('./repositories/measurementRepository');
+var LightSensorService = require('./app/services/lightSensorService');
+var MeasurementRepository = require('./app/repositories/measurementRepository');
 var isWindowsPlatform = /^win/.test(process.platform);
-var LightSensor = isWindowsPlatform ? require('./sensors/lightSensorMock') : require('./sensors/lightSensor');
+var LightSensor = isWindowsPlatform ? require('./app/sensors/lightSensorMock') : require('./app/sensors/lightSensor');
 
 mongoose.connect('mongodb://localhost:8910/RaspiSenseDatabase', function (error) {
     if (error) {

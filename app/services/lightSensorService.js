@@ -1,6 +1,8 @@
+'use strict';
+
 function LightSensorService(lightSensor) {
     if(!lightSensor) {
-        throw 'A light sensor has to be provided.'
+        throw 'A light sensor has to be provided.';
     }
     this._lightSensor = lightSensor;
 }

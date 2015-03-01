@@ -1,8 +1,10 @@
+'use strict';
+
 var MeasurementModel = require('../models/measurementModel');
 
 function MeasurementRepository() {
 
-};
+}
 
 MeasurementRepository.prototype.saveMeasurement = function (sensorValue) {
     var modelSensorValue = convertSensorValueToModelSensorValue(sensorValue);
@@ -15,6 +17,6 @@ MeasurementRepository.prototype.saveMeasurement = function (sensorValue) {
 
 function convertSensorValueToModelSensorValue(measurement) {
     return measurement;
-};
+}
 
 module.exports = MeasurementRepository;
