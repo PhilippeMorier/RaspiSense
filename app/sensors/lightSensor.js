@@ -14,13 +14,13 @@ LightSensor.prototype.initialize = function () {
             command: 0x11,
             length: 2
         });
+
+        this._isInitialized = true;
     }
     catch (error) {
         console.log(error);
         this._isInitialized = false;
     }
-
-    this._isInitialized = true;
 };
 
 LightSensor.prototype.isInitialized = function () {

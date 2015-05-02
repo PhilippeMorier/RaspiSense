@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var childProcess = require('child_process');
 var eslint = require('gulp-eslint');
 
 var paths = {
@@ -18,6 +19,12 @@ gulp.task('lint', function () {
 
 gulp.task('watch', function() {
     gulp.watch(paths.scripts, ['lint']);
+});
+
+gulp.task('startMongo', function () {
+    childProcess.exec('start mongod --config D:/_git/RaspiSense/db/mongodb.conf', function(error) {
+        console.log(error);
+    });
 });
 
 gulp.task('default', ['lint', 'watch']);
