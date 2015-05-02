@@ -43,9 +43,9 @@ RoutingService.prototype.initialize = function () {
     this._server.post('/measurements', function (request, response, next) {
         self._lightSensorService.readSensorValue(function(sensorValue) {
             self._measurementRepository.saveMeasurement(sensorValue);
+            response.send('Measurement was taken!');
         });
 
-        request.send(sensorValue);
         return next();
     });
 };
