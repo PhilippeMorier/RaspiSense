@@ -8,17 +8,17 @@ function HumiditySensorService(humiditySensor) {
 }
 
 HumiditySensorService.prototype.readSensorValues = function (callback) {
-    this._humiditySensor.read(function (value) {
+    this._humiditySensor.read(function (data) {
         var sensorValues = [
             {
                 typeLabel: 'Temperature',
-                value: value.temperature,
+                value: data.temperature,
                 unit: '°C',
                 sensorId: 2
             },
             {
                 typeLabel: 'Humidity',
-                value: value.humidity,
+                value: data.humidity,
                 unit: '%',
                 sensorId: 2
             }

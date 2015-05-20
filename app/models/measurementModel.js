@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var typeLabels = ['Temperature', 'Humidity', 'Light', 'Pressure'];
+var typeLabels = ['Temperature', 'Humidity', 'Light', 'Air Pressure'];
 var sensorValueSchema = new Schema({
 	typeLabel: { type: String, required: true, enum: typeLabels },
 	value: { type: Number, required: true },

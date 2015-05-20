@@ -6,18 +6,13 @@ function MeasurementRepository() {
 
 }
 
-MeasurementRepository.prototype.saveMeasurement = function (sensorValue) {
-    var modelSensorValue = convertSensorValueToModelSensorValue(sensorValue);
+MeasurementRepository.prototype.saveMeasurement = function (sensorValues) {
     var toSaveMeasurementModel = new MeasurementModel({
-        sensorValues: [modelSensorValue]
+        sensorValues: sensorValues
     });
 
     toSaveMeasurementModel.save();
 };
-
-function convertSensorValueToModelSensorValue(measurement) {
-    return measurement;
-}
 
 MeasurementRepository.prototype.getAllMeasurements = function (callback) {
     MeasurementModel

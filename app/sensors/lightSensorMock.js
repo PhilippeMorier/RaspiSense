@@ -1,18 +1,18 @@
 'use strict';
 
-function LightSensor() {
+function LightSensorMock() {
 }
 
-LightSensor.prototype.initialize = function () {
+LightSensorMock.prototype.initialize = function () {
 
 };
 
-LightSensor.prototype.isInitialized = function () {
+LightSensorMock.prototype.isInitialized = function () {
     return true;
 };
 
-LightSensor.prototype.read = function (callback) {
+LightSensorMock.prototype.read = function (callback) {
     callback(122);
 };
 
-module.exports = new LightSensor();
+module.exports = new LightSensorMock();

@@ -1,21 +1,21 @@
 'use strict';
 
-function HumiditySensor() {
+function HumiditySensorMock() {
 }
 
-HumiditySensor.prototype.initialize = function () {
+HumiditySensorMock.prototype.initialize = function () {
 
 };
 
-HumiditySensor.prototype.isInitialized = function () {
+HumiditySensorMock.prototype.isInitialized = function () {
     return true;
 };
 
-HumiditySensor.prototype.read = function (callback) {
+HumiditySensorMock.prototype.read = function (callback) {
     callback({
         humidity: 71,
         temperature: 21
     });
 };
 
-module.exports = new HumiditySensor();
+module.exports = new HumiditySensorMock();

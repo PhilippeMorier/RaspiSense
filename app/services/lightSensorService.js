@@ -4,11 +4,11 @@ function LightSensorService(lightSensor) {
     if(!lightSensor) {
         throw 'A light sensor has to be provided.';
     }
-    this._lightSensor = lightSensor;
+    this._airPressureSensor = lightSensor;
 }
 
 LightSensorService.prototype.readSensorValue = function (callback) {
-    this._lightSensor.read(function (value) {
+    this._airPressureSensor.read(function (value) {
         var sensorValue = {
             typeLabel: 'Light',
             value: value,
