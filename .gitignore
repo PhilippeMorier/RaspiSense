@@ -3,3 +3,4 @@ node_modules/
 db/journal/
 *.ns
 *.0
+.idea/workspace.xml

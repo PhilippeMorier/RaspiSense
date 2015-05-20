@@ -12,7 +12,7 @@ LightSensor.prototype.isInitialized = function () {
 };
 
 LightSensor.prototype.read = function (callback) {
-    callback(42);
+    callback(122);
 };
 
-module.exports = LightSensor;
+module.exports = new LightSensor();

@@ -34,4 +34,4 @@ LightSensor.prototype.read = function (callback) {
     callback();
 };
 
-module.exports = LightSensor;
+module.exports = new LightSensor();
