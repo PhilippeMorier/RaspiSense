@@ -11,7 +11,11 @@ MeasurementRepository.prototype.saveMeasurement = function (sensorValues) {
         sensorValues: sensorValues
     });
 
-    toSaveMeasurementModel.save();
+    toSaveMeasurementModel.save(function (error) {
+        if (error) {
+            throw error;
+        }
+    });
 };
 
 MeasurementRepository.prototype.getAllMeasurements = function (callback) {
