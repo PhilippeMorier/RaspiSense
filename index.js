@@ -1,15 +1,15 @@
 'use strict';
 
-var async = require('async');
 var mongoose = require('mongoose');
 var RoutingService = require('./app/services/routingService');
 var LightSensorService = require('./app/services/lightSensorService');
 var HumiditySensorService = require('./app/services/humiditySensorService');
 var AirPressureSensorService = require('./app/services/airPressureSensorService');
 var MeasurementRepository = require('./app/repositories/measurementRepository');
+var MeasurementService = require('./app/services/measurementService');
 var isWindowsPlatform = /^win/.test(process.platform);
 
-mongoose.connect('mongodb://localhost:8910/RaspiSenseDatabase', function (error) {
+mongoose.connect('mongodb://127.0.0.1:8910/RaspiSenseDatabase', function (error) {
     if (error) {
         throw error;
     }
@@ -32,51 +32,22 @@ if (humiditySensor.isInitialized() && lightSensor.isInitialized() && airPressure
     var humiditySensorService = new HumiditySensorService(humiditySensor);
     var airPressureSensorService = new AirPressureSensorService(airPressureSensor);
 
-    async.parallel({
-            lightSensorValue: function (callback) {
-                lightSensorService.readSensorValue(function (lightValue) {
-                    callback(null, [lightValue]);
-                });
-            },
-            humiditySensorValues: function (callback) {
-                humiditySensorService.readSensorValues(function (humidityAndTemperatureValue) {
-                    callback(null, humidityAndTemperatureValue);
-                });
-            },
-            airPressureSensorValues: function (callback) {
-                airPressureSensorService.readSensorValues(function (airPressureAndTemperatureValue) {
-                    callback(null, airPressureAndTemperatureValue);
-                });
-            }
-        },
-        function (error, sensorValues) {
-            if (!error) {
-                var allSensorValues = sensorValues.lightSensorValue
-                    .concat(sensorValues.humiditySensorValues)
-                    .concat(sensorValues.airPressureSensorValues);
+    /*measurementRepository.getMeasurement('54f1d92a79568a3c0a5916bd', function (error, measurement) {
+     // an empty query result is not actually an error
+     console.log(measurement);
+     });*/
 
-                measurementRepository.saveMeasurement(allSensorValues);
-            }
-        }
-    );
+    /*measurementRepository.getMeasurementInDateRange(new Date('2015/03/01 15:24:14'), Date.now(), function (error, measurements) {
+     console.log(measurements);
+     });*/
 
-    if (lightSensorService) {
+    /*measurementRepository.getAllMeasurements(function (error, measurements) {
+     console.log(measurements);
+     });*/
 
-        /*measurementRepository.getMeasurement('54f1d92a79568a3c0a5916bd', function (error, measurement) {
-         // an empty query result is not actually an error
-         console.log(measurement);
-         });*/
+    var measurementService = new MeasurementService(measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService);
+    var routingService = new RoutingService(measurementService, measurementRepository);
 
-        /*measurementRepository.getMeasurementInDateRange(new Date('2015/03/01 15:24:14'), Date.now(), function (error, measurements) {
-         console.log(measurements);
-         });*/
-
-        /*measurementRepository.getAllMeasurements(function (error, measurements) {
-         console.log(measurements);
-         });*/
-    }
-
-    var routingService = new RoutingService(measurementRepository, lightSensorService);
     routingService.initialize();
     routingService.startListen();
 }

@@ -2,17 +2,17 @@
 
 var restify = require('restify');
 
-var RoutingService = function (measurementRepository, lightSensorService) {
+var RoutingService = function (measurementService, measurementRepository) {
+    this._measurementService = measurementService;
     this._measurementRepository = measurementRepository;
-    this._lightSensorService = lightSensorService;
 
-    if (!this._measurementRepository) {
-        throw 'A measurement repository has to be provided.';
+    if (!this._measurementService || !this._measurementRepository) {
+        throw 'A measurement service and repository has to be provided.';
     }
 
     this._server = restify.createServer({
         name: 'RaspiSense',
-        version: '0.0.0'
+        version: '0.0.1'
     });
 };
 
@@ -23,6 +23,11 @@ RoutingService.prototype.initialize = function () {
     this._server.use(restify.jsonp());
     this._server.use(restify.queryParser());
     this._server.use(restify.bodyParser());
+
+    this._server.pre(function (request, response, next) {
+        console.log(getRequestIp(request) + ' ' + request.method + ' ' + request.url + ' HTTP/' + request.httpVersion);
+        return next();
+    });
 
     this._server.get('/measurements', function (request, response, next) {
         self._measurementRepository.getAllMeasurements(function (error, measurements) {
@@ -41,8 +46,8 @@ RoutingService.prototype.initialize = function () {
     });
 
     this._server.post('/measurements', function (request, response, next) {
-        self._lightSensorService.readSensorValue(function(sensorValue) {
-            self._measurementRepository.saveMeasurement([sensorValue]);
+        self._measurementService.takeMeasurement(function (sensorValues) {
+            self._measurementRepository.saveMeasurement(sensorValues);
             response.send('Measurement was taken!');
         });
 
@@ -53,8 +58,17 @@ RoutingService.prototype.initialize = function () {
 RoutingService.prototype.startListen = function () {
     var server = this._server;
     server.listen(8080, function () {
-        console.log('%s listening at %s', server.name, server.url);
+        console.log('%s listening at %s', server.name, 8080);
     });
 };
+
+function getRequestIp(request) {
+    var ip = request.headers['x-forwarded-for'] ||
+        request.connection.remoteAddress ||
+        request.socket.remoteAddress ||
+        request.connection.socket.remoteAddress;
+
+    return ip;
+}
 
 module.exports = RoutingService;

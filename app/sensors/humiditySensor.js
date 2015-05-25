@@ -7,7 +7,8 @@ function HumiditySensor() {
 }
 
 HumiditySensor.prototype.initialize = function () {
-    this._isInitialized = Dht22.initialize(22, 14); // type, pin
+    this._dht22 = Dht22;
+    this._isInitialized = this._dht22.initialize(22, 14); // type, pin
 };
 
 HumiditySensor.prototype.isInitialized = function () {
@@ -15,7 +16,7 @@ HumiditySensor.prototype.isInitialized = function () {
 };
 
 HumiditySensor.prototype.read = function (callback) {
-    var value = Dht22.read();
+    var value = this._dht22.read();
 
     callback({
         humidity: value.humidity.toFixed(1),
