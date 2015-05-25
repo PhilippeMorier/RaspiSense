@@ -3,6 +3,7 @@ node_modules/
 db/journal/
 *.ns
 *.0
+.idea/RespiSense.iml
 .idea/workspace.xml
 .idea/jsLibraryMappings.xml
 .idea/dictionaries
