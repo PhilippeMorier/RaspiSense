@@ -18,6 +18,7 @@ MeasurementRepository.prototype.saveMeasurement = function (sensorValues) {
     });
 };
 
+// measurementRepository.getAllMeasurements(function (error, measurements) {};
 MeasurementRepository.prototype.getAllMeasurements = function (callback) {
     MeasurementModel
         .find()
@@ -26,7 +27,8 @@ MeasurementRepository.prototype.getAllMeasurements = function (callback) {
         });
 };
 
-MeasurementRepository.prototype.getMeasurement = function (id, callback) {
+// measurementRepository.getMeasurementFromId('54f1d92a79568a3c0a5916bd', function (error, measurement) {};
+MeasurementRepository.prototype.getMeasurementFromId = function (id, callback) {
     MeasurementModel
         .findById(id)
         .exec(function (error, measurement) {
@@ -34,6 +36,7 @@ MeasurementRepository.prototype.getMeasurement = function (id, callback) {
         });
 };
 
+// measurementRepository.getMeasurementInDateRange(new Date('2015/03/01 15:24:14'), Date.now(), function (error, measurements) {};
 MeasurementRepository.prototype.getMeasurementInDateRange = function (startDate, endDate, callback) {
     MeasurementModel
         .where('takenOn')
@@ -41,6 +44,15 @@ MeasurementRepository.prototype.getMeasurementInDateRange = function (startDate,
         .lt(endDate)
         .exec(function (error, measurements) {
             callback(error, measurements);
+        });
+};
+
+MeasurementRepository.prototype.deleteMeasurementFromId = function (id, callback) {
+    MeasurementModel
+        .findById(id)
+        .remove()
+        .exec(function (error) {
+            callback(error);
         });
 };
 

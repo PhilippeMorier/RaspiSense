@@ -1,6 +1,7 @@
 'use strict';
 
 var restify = require('restify');
+var string = require('../extensions/stringExtension');
 
 var RoutingService = function (measurementService, measurementRepository) {
     this._measurementService = measurementService;
@@ -25,7 +26,7 @@ RoutingService.prototype.initialize = function () {
     this._server.use(restify.bodyParser());
 
     this._server.pre(function (request, response, next) {
-        console.log(getRequestIp(request) + ' ' + request.method + ' ' + request.url + ' HTTP/' + request.httpVersion);
+        console.log(string.format('{0} {1} {2} HTTP/{3}', getRequestIp(request), request.method, request.url, request.httpVersion));
         return next();
     });
 
@@ -38,7 +39,7 @@ RoutingService.prototype.initialize = function () {
     });
 
     this._server.get('/measurements/:id', function (request, response, next) {
-        self._measurementRepository.getMeasurement(request.params.id, function (error, measurement) {
+        self._measurementRepository.getMeasurementFromId(request.params.id, function (error, measurement) {
             response.send(measurement);
         });
 
@@ -49,6 +50,17 @@ RoutingService.prototype.initialize = function () {
         self._measurementService.takeMeasurement(function (sensorValues) {
             self._measurementRepository.saveMeasurement(sensorValues);
             response.send('Measurement was taken!');
+        });
+
+        return next();
+    });
+
+    this._server.del('/measurements/:id', function (request, response, next) {
+        self._measurementRepository.deleteMeasurementFromId(request.params.id, function (error) {
+            if(error) {
+                throw error;
+            }
+            response.send('Measurement deleted!');
         });
 
         return next();
