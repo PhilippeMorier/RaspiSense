@@ -32,19 +32,6 @@ if (humiditySensor.isInitialized() && lightSensor.isInitialized() && airPressure
     var humiditySensorService = new HumiditySensorService(humiditySensor);
     var airPressureSensorService = new AirPressureSensorService(airPressureSensor);
 
-    /*measurementRepository.getMeasurement('54f1d92a79568a3c0a5916bd', function (error, measurement) {
-     // an empty query result is not actually an error
-     console.log(measurement);
-     });*/
-
-    /*measurementRepository.getMeasurementInDateRange(new Date('2015/03/01 15:24:14'), Date.now(), function (error, measurements) {
-     console.log(measurements);
-     });*/
-
-    /*measurementRepository.getAllMeasurements(function (error, measurements) {
-     console.log(measurements);
-     });*/
-
     var measurementService = new MeasurementService(measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService);
     var routingService = new RoutingService(measurementService, measurementRepository);
 
