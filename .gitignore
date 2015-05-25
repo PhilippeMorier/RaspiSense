@@ -4,3 +4,6 @@ db/journal/
 *.ns
 *.0
 .idea/workspace.xml
+.idea/jsLibraryMappings.xml
+.idea/dictionaries
+.idea/libraries
