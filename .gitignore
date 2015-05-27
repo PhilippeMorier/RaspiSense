@@ -1,5 +1,7 @@
-node_modules/
+# Dependency directory
+node_modules
 
+# WebStorm
 .idea/workspace.xml
 .idea/jsLibraryMappings.xml
 .idea/dictionaries

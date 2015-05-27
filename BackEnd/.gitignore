@@ -1,5 +1,7 @@
-node_modules/
+# Dependency directory
+node_modules
 
+# MongoDB
 *.lock
 db/journal/
 *.ns
