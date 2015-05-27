@@ -1,0 +1,21 @@
+{
+  "name": "RaspiSense.BackEnd",
+  "version": "0.0.1",
+  "description": "Consumes a REST API which provides sensor information for temperatur, light, pressure and humidity.",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sensor",
+    "temperatur",
+    "light",
+    "pressure",
+    "humidity",
+    "REST"
+  ],
+  "author": "Thorgal Hayne",
+  "license": "ISC"
+}
