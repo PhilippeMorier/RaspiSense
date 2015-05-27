@@ -1,10 +1,15 @@
 node_modules/
+
 *.lock
 db/journal/
 *.ns
 *.0
+*._0
+
 .idea/RespiSense.iml
 .idea/workspace.xml
 .idea/jsLibraryMappings.xml
 .idea/dictionaries
 .idea/libraries
+
+BackEnd/node_modules

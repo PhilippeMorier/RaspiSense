@@ -5,7 +5,7 @@ var childProcess = require('child_process');
 var eslint = require('gulp-eslint');
 
 var paths = {
-    scripts: ['./app/**/*.js', './*.js']
+    scripts: ['./BackEnd/app/**/*.js', './*.js']
 };
 
 gulp.task('lint', function () {
@@ -22,7 +22,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('startMongo', function () {
-    childProcess.exec('start mongod --config D:/_git/RaspiSense/db/mongodb.conf', function(error) {
+    childProcess.exec('start mongod --config D:/_git/RaspiSense/BackEnd/db/mongodb.conf', function(error) {
         console.log(error);
     });
 });
