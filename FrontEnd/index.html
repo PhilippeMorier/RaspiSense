@@ -5,6 +5,7 @@
 
     <!-- build:css libs.min.css -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/angularjs-toaster/toaster.css" rel="stylesheet">
     <!-- /build -->
 
     <title>RaspiSense</title>
@@ -16,11 +17,15 @@
 </ul>
 <div>
     <div data-ng-view></div>
+    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button': true, 'time-out': 2000,}"></toaster-container>
 </div>
 
 <!-- build:js libs.min.js -->
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+
+<script src="bower_components/angularjs-toaster/toaster.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
 <!-- /build -->
 
 <!-- build:js app.min.js -->

@@ -4,6 +4,7 @@
     angular.module('app', [
         // 3rd party modules
         'ngRoute',
+        'toaster',
 
         // Our services
         //'app.services',
