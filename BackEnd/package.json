@@ -1,20 +1,10 @@
 {
   "name": "RaspiSense.BackEnd",
   "version": "0.0.1",
+  "author": "Thorgal Hayne",
   "description": "Uses different sensors to retrieve temperatur, light, pressure and humidity and provides a REST API.",
+  "license": "ISC",
   "main": "index.js",
-  "dependencies": {
-    "async": "^0.9.2",
-    "bh1750": "file:packages\\bh1750",
-    "bmp085": "file:packages\\bmp085",
-    "i2c": "^0.1.8",
-    "mongoose": "^4.0.2",
-    "node-dht-sensor": "0.0.7",
-    "restify": "^3.0.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "sensor",
     "temperatur",
@@ -23,6 +13,16 @@
     "humidity",
     "REST"
   ],
-  "author": "Thorgal Hayne",
-  "license": "ISC"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "async": "^0.9.2",
+    "mongoose": "^4.0.2",
+    "restify": "^3.0.2",
+    "bh1750": "file:packages\\bh1750",
+    "bmp085": "file:packages\\bmp085",
+    "node-dht-sensor": "0.0.7",
+    "i2c": "^0.1.8"
+  }
 }
