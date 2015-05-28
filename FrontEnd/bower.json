@@ -4,7 +4,7 @@
   "authors": "Thorgal Hayne",
   "description": "Consumes a REST API which provides sensor information for temperature, light, pressure and humidity.",
   "license": "ISC",
-  "main": "index.js",
+  "main": "index.html",
   "keywords": [
     "sensor",
     "temperature",
@@ -21,6 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.0"
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0"
   }
 }

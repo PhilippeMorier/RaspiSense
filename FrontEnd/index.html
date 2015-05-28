@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html data-ng-app="app">
+<head>
+    <meta charset="utf-8"/>
+
+    <!-- build:css libs.min.css -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- /build -->
+
+    <title>RaspiSense</title>
+</head>
+<body>
+
+<ul>
+    <li><a href="#/overview">Overview</a></li>
+</ul>
+<div>
+    <div data-ng-view></div>
+</div>
+
+<!-- build:js libs.min.js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<!-- /build -->
+
+<!-- build:js app.min.js -->
+<script src="app/app.module.js"></script>
+
+<!--<script src="/app/services/services.module.js"></script>-->
+<!--<script src="/app/services/imageService.js"></script>-->
+
+<script src="app/modules/overview/overview.module.js"></script>
+<script src="app/modules/overview/overview.route.js"></script>
+<script src="app/modules/overview/overview.controller.js"></script>
+<!-- /build -->
+
+</body>
+</html>
