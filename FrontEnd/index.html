@@ -5,19 +5,45 @@
 
     <!-- build:css libs.min.css -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
     <link href="bower_components/angularjs-toaster/toaster.css" rel="stylesheet">
+    <!-- /build -->
+
+    <!-- build:css app.min.css -->
+    <link href="css/app.css" rel="stylesheet">
     <!-- /build -->
 
     <title>RaspiSense</title>
 </head>
 <body>
-
-<ul>
-    <li><a href="#/overview">Overview</a></li>
-</ul>
 <div>
-    <div data-ng-view></div>
-    <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button': true, 'time-out': 2000,}"></toaster-container>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a href="#/overview">Overview</a></li>
+                <li><a href="#/measurements">Measurements</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" data-ng-view>
+
+    </div>
+    <toaster-container toaster-options="
+                {
+                    'position-class': 'toast-bottom-right',
+                    'close-button': true,
+                    'time-out': 2000
+                }">
+    </toaster-container>
+
+    <footer>
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container text-muted text-center">
+                2015 · Philippe Morier
+            </div>
+        </nav>
+    </footer>
 </div>
 
 <!-- build:js libs.min.js -->

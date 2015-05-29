@@ -9,7 +9,7 @@
     function OverviewController($q, toaster) {
 
         var overviewViewModel = this;
-        overviewViewModel.title = 'Overview PAENG!';
+        overviewViewModel.title = 'Overview';
 
         activate();
 
