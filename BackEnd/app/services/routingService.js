@@ -20,17 +20,19 @@ var RoutingService = function (measurementService, measurementRepository) {
 RoutingService.prototype.initialize = function () {
     var self = this;
 
-    this._server.use(restify.acceptParser(this._server.acceptable));
-    this._server.use(restify.jsonp());
-    this._server.use(restify.queryParser());
-    this._server.use(restify.bodyParser());
+    self._server.use(restify.acceptParser(this._server.acceptable));
+    self._server.use(restify.jsonp());
+    restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
+    self._server.use(restify.CORS());
+    self._server.use(restify.queryParser());
+    self._server.use(restify.bodyParser());
 
-    this._server.pre(function (request, response, next) {
+    self._server.pre(function (request, response, next) {
         console.log(string.format('{0} {1} {2} HTTP/{3}', getRequestIp(request), request.method, request.url, request.httpVersion));
         return next();
     });
 
-    this._server.get('/measurements', function (request, response, next) {
+    self._server.get('/measurements', function (request, response, next) {
         self._measurementRepository.getAllMeasurements(function (error, measurements) {
             response.send(measurements);
         });
@@ -38,7 +40,7 @@ RoutingService.prototype.initialize = function () {
         return next();
     });
 
-    this._server.get('/measurements/:id', function (request, response, next) {
+    self._server.get('/measurements/:id', function (request, response, next) {
         self._measurementRepository.getMeasurementFromId(request.params.id, function (error, measurement) {
             response.send(measurement);
         });
@@ -46,7 +48,7 @@ RoutingService.prototype.initialize = function () {
         return next();
     });
 
-    this._server.post('/measurements', function (request, response, next) {
+    self._server.post('/measurements', function (request, response, next) {
         self._measurementService.takeMeasurement(function (sensorValues) {
             self._measurementRepository.saveMeasurement(sensorValues);
             response.send('Measurement was taken!');
@@ -55,7 +57,7 @@ RoutingService.prototype.initialize = function () {
         return next();
     });
 
-    this._server.del('/measurements/:id', function (request, response, next) {
+    self._server.del('/measurements/:id', function (request, response, next) {
         self._measurementRepository.deleteMeasurementFromId(request.params.id, function (error) {
             if(error) {
                 throw error;

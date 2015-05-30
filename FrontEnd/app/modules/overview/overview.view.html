@@ -1,3 +1,4 @@
 <div>
     <h1>{{overviewViewModel.title}}</h1>
+    <div data-ng-repeat="measurement in overviewViewModel.measurements">{{measurement._id}} taken on {{measurement.takenOn.getDate() + '.' + measurement.takenOn.getMonth() + 1 + '.' + measurement.takenOn.getFullYear()}}</div>
 </div>

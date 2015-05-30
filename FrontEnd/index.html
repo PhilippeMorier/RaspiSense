@@ -30,11 +30,11 @@
 
     </div>
     <toaster-container toaster-options="
-                {
-                    'position-class': 'toast-bottom-right',
-                    'close-button': true,
-                    'time-out': 2000
-                }">
+                    {
+                        'position-class': 'toast-bottom-right',
+                        'close-button': true,
+                        'time-out': 2000
+                    }">
     </toaster-container>
 
     <footer>
@@ -49,6 +49,7 @@
 <!-- build:js libs.min.js -->
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
 
 <script src="bower_components/angularjs-toaster/toaster.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -57,8 +58,11 @@
 <!-- build:js app.min.js -->
 <script src="app/app.module.js"></script>
 
-<!--<script src="/app/services/services.module.js"></script>-->
-<!--<script src="/app/services/imageService.js"></script>-->
+<script src="app/services/services.module.js"></script>
+<script src="app/services/measurementService.js"></script>
+
+<script src="app/resources/resources.module.js"></script>
+<script src="app/resources/measurementResource.js"></script>
 
 <script src="app/modules/overview/overview.module.js"></script>
 <script src="app/modules/overview/overview.route.js"></script>
