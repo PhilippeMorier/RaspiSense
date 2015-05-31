@@ -14,6 +14,7 @@
         'app.resources',
 
         // Our modules
-        'app.modules.overview'
+        'app.modules.overview',
+        'app.modules.measurement'
     ]);
 })();
