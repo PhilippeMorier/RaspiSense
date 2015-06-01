@@ -16,9 +16,7 @@
 
         function activate() {
             var promises = [getAllMeasurements()];
-            return $q.all(promises).then(function () {
-                toaster.pop('info', 'overview.controller.js', 'Activated and all data loaded!');
-            });
+            return $q.all(promises);
         }
 
         function getAllMeasurements() {

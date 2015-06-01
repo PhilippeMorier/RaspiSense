@@ -1,3 +1,70 @@
 <div>
-    <h1>{{measurementViewModel.title}}</h1>
+    <div class="col-sm-12">
+        <h1>{{measurementViewModel.title}}</h1>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputId" class="col-sm-2 control-label">Id</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="inputId" placeholder="Id" readonly
+                           value="{{measurementViewModel.measurement._id}}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputTakenOn" class="col-sm-2 control-label">Taken on</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="inputTakenOn" placeholder="Taken on" readonly
+                           value="{{measurementViewModel.measurement.takenOn | date: 'dd.MM.yyyy \'at\' HH:mm'}}"/>
+                </div>
+            </div>
+
+            <div class="form-group" data-ng-repeat="sensorValue in measurementViewModel.measurement.sensorValues">
+                <label for="inputSensorValue{{$index}}" class="col-sm-2 control-label">{{sensorValue.typeLabel}}</label>
+
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="inputSensorValue{{$index}}" readonly
+                           value="{{sensorValue.value}} {{sensorValue.unit}}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputComment" class="col-sm-2 control-label">Comment</label>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="inputComment" placeholder="A comment..."
+                           value="{{measurementViewModel.measurement.comment}}"/>
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-12">&nbsp
+        <h3>New measurement</h3>
+
+        <form class="horizontal">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-success" data-ng-click="measurementViewModel.takeMeasurement()">Take</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-12">
+        <h3>Delete measurement</h3>
+
+        <form class="horizontal">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-danger" data-ng-click="measurementViewModel.deleteMeasurement()">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
