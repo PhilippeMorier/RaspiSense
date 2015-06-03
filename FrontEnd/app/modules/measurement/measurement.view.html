@@ -34,11 +34,14 @@
                 <label for="inputComment" class="col-sm-2 control-label">Comment</label>
 
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputComment" placeholder="A comment..."
+                    <input type="text" class="form-control" id="inputComment" ng-model='measurementViewModel.comment'
+                           placeholder="A comment..."
                            value="{{measurementViewModel.measurement.comment}}"/>
                 </div>
                 <div class="col-sm-2">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary"
+                            data-ng-click="measurementViewModel.updateMeasurementComment()">Update
+                    </button>
                 </div>
             </div>
         </form>
@@ -50,7 +53,9 @@
         <form class="horizontal">
             <div class="form-group">
                 <div class="col-sm-2">
-                    <button type="submit" class="btn btn-success" data-ng-click="measurementViewModel.takeMeasurement()">Take</button>
+                    <button type="submit" class="btn btn-success"
+                            data-ng-click="measurementViewModel.takeMeasurement()">Take
+                    </button>
                 </div>
             </div>
         </form>
@@ -62,7 +67,9 @@
         <form class="horizontal">
             <div class="form-group">
                 <div class="col-sm-2">
-                    <button type="submit" class="btn btn-danger" data-ng-click="measurementViewModel.deleteMeasurement()">Delete</button>
+                    <button type="submit" class="btn btn-danger"
+                            data-ng-click="measurementViewModel.deleteMeasurement()">Delete
+                    </button>
                 </div>
             </div>
         </form>

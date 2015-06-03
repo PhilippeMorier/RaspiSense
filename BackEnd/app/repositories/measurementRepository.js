@@ -1,9 +1,10 @@
 'use strict';
 
 var MeasurementModel = require('../models/measurementModel');
+var self = [];
 
 function MeasurementRepository() {
-
+    self = this;
 }
 
 MeasurementRepository.prototype.saveMeasurement = function (sensorValues) {
@@ -45,6 +46,14 @@ MeasurementRepository.prototype.getMeasurementInDateRange = function (startDate,
         .exec(function (error, measurements) {
             callback(error, measurements);
         });
+};
+
+MeasurementRepository.prototype.updateMeasurement = function (id, comment, callback) {
+    MeasurementModel.update({_id: id}, {comment: comment}, function (error, numberAffected, rawResponse) {
+        self.getMeasurementFromId(id, function (innerError, measurement) {
+            callback(error, numberAffected, rawResponse, measurement);
+        });
+    });
 };
 
 MeasurementRepository.prototype.deleteMeasurementFromId = function (id, callback) {

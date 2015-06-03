@@ -21,8 +21,6 @@ RoutingService.prototype.initialize = function () {
     var self = this;
 
     self._server.use(restify.acceptParser(this._server.acceptable));
-    self._server.use(restify.jsonp());
-    restify.CORS.ALLOW_HEADERS.push('Access-Control-Allow-Origin');
     self._server.use(restify.CORS());
     self._server.use(restify.queryParser());
     self._server.use(restify.bodyParser());
@@ -57,9 +55,18 @@ RoutingService.prototype.initialize = function () {
         return next();
     });
 
+    self._server.put('/measurements/:id', function (request, response, next) {
+        var measurement = request.params;
+        self._measurementRepository.updateMeasurement(measurement.id, measurement.comment, function (error, numberAffected, rawResponse, measurement) {
+            response.send(measurement);
+        });
+
+        return next();
+    });
+
     self._server.del('/measurements/:id', function (request, response, next) {
         self._measurementRepository.deleteMeasurementFromId(request.params.id, function (error) {
-            if(error) {
+            if (error) {
                 throw error;
             }
             response.send('Measurement deleted!');
