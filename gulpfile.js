@@ -26,7 +26,7 @@ gulp.task('watch', function () {
     gulp.watch(paths.scripts, ['lint']);
 });
 
-gulp.task('startMongo', function () {
+gulp.task('start_mongo', function () {
     childProcess.exec('start mongod --config D:/_git/RaspiSense/BackEnd/db/mongodb.conf', function (error) {
         console.log(error);
     });
@@ -35,18 +35,11 @@ gulp.task('startMongo', function () {
 gulp.task('replace_html', function () {
     return gulp.src('./FrontEnd/index.html')
         .pipe(replace({
-            'jsLibs': 'js/libs.concat.js',
-            'jsApp': 'js/app.concat.js',
+            'jsLibs': 'js/libs.min.js',
+            'jsApp': 'js/app.min.js',
             'cssLibs': 'css/libs.concat.css',
             'cssApp': 'css/app.concat.css'
         }))
-        .pipe(gulp.dest('./FrontEnd/dist/'));
-});
-
-gulp.task('minify_bower', ['concat_bower'], function () {
-    return gulp.src('./FrontEnd/dist/libs.concat.js')
-        .pipe(uglify())
-        .pipe(rename('libs.min.js'))
         .pipe(gulp.dest('./FrontEnd/dist/'));
 });
 
@@ -84,11 +77,16 @@ gulp.task('copy_fonts', function () {
 });
 
 gulp.task('minify', ['concat'], function () {
-    return gulp.src('./FrontEnd/dist/app.concat.js')
+    gulp.src('./FrontEnd/dist/js/app.concat.js')
         .pipe(uglify())
         .pipe(rename('app.min.js'))
-        .pipe(gulp.dest('./FrontEnd/dist/'));
+        .pipe(gulp.dest('./FrontEnd/dist/js/'));
+
+    gulp.src('./FrontEnd/dist/js/libs.concat.js')
+        .pipe(uglify())
+        .pipe(rename('libs.min.js'))
+        .pipe(gulp.dest('./FrontEnd/dist/js/'));
 });
 
 gulp.task('default', ['lint', 'watch']);
-gulp.task('deploy', ['concat', 'copy_views', 'copy_img', 'copy_fonts', 'replace_html']);
+gulp.task('deploy', ['minify', 'copy_views', 'copy_img', 'copy_fonts', 'replace_html']);
