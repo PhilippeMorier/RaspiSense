@@ -57,8 +57,8 @@ RoutingService.prototype.initialize = function () {
 
     self._server.put('/measurements/:id', function (request, response, next) {
         var measurement = request.params;
-        self._measurementRepository.updateMeasurement(measurement.id, measurement.comment, function (error, numberAffected, rawResponse, measurement) {
-            response.send(measurement);
+        self._measurementRepository.updateMeasurement(measurement.id, measurement.comment, function (error, numberAffected, rawResponse, editedMeasurement) {
+            response.send(editedMeasurement);
         });
 
         return next();
