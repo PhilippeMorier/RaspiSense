@@ -8,7 +8,7 @@
         'toaster',
 
         // Our services
-        'app.services',
+        //'app.services',
 
         // Our resources
         'app.resources',

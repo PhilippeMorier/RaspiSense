@@ -20,7 +20,7 @@
         }
 
         function getAllMeasurements() {
-            measurementResource.query(function(measurements){
+            measurementResource.query(function (measurements) {
                 overviewViewModel.measurements = measurements;
                 toaster.pop('info', 'overview.controller.js', measurements.length + ' measurements fetched!');
             });
