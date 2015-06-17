@@ -23,6 +23,6 @@
     "bh1750": "file:packages\\bh1750",
     "bmp085": "file:packages\\bmp085",
     "node-dht-sensor": "0.0.7",
-    "i2c": "^0.1.8"
+    "i2c": "^0.2.1"
   }
 }
