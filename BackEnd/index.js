@@ -7,6 +7,7 @@ var HumiditySensorService = require('./app/services/humiditySensorService');
 var AirPressureSensorService = require('./app/services/airPressureSensorService');
 var MeasurementRepository = require('./app/repositories/measurementRepository');
 var MeasurementService = require('./app/services/measurementService');
+var CameraService = require('./app/services/cameraSensorService');
 var isWindowsPlatform = /^win/.test(process.platform);
 
 mongoose.connect('mongodb://127.0.0.1:8910/RaspiSenseDatabase', function (error) {
@@ -24,6 +25,8 @@ lightSensor.initialize();
 var airPressureSensor = isWindowsPlatform ? require('./app/sensors/airPressureSensorMock') : require('./app/sensors/airPressureSensor');
 airPressureSensor.initialize();
 
+var cameraSensor = require('./app/sensors/cameraSensor');
+
 if (humiditySensor.isInitialized() && lightSensor.isInitialized() && airPressureSensor.isInitialized()) {
 
     var measurementRepository = new MeasurementRepository();
@@ -31,8 +34,9 @@ if (humiditySensor.isInitialized() && lightSensor.isInitialized() && airPressure
     var lightSensorService = new LightSensorService(lightSensor);
     var humiditySensorService = new HumiditySensorService(humiditySensor);
     var airPressureSensorService = new AirPressureSensorService(airPressureSensor);
+    var cameraService = new CameraService(cameraSensor);
 
-    var measurementService = new MeasurementService(measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService);
+    var measurementService = new MeasurementService(measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService, cameraService);
     var routingService = new RoutingService(measurementService, measurementRepository);
 
     routingService.initialize();

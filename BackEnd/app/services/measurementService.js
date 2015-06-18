@@ -2,11 +2,12 @@
 
 var async = require('async');
 
-var MeasurementService = function (measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService) {
+var MeasurementService = function (measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService, cameraSensorService) {
     this._airPressureSensorService = airPressureSensorService;
     this._humiditySensorService = humiditySensorService;
     this._lightSensorService = lightSensorService;
     this._measurementRepository = measurementRepository;
+    this._cameraSensorService = cameraSensorService;
 };
 
 MeasurementService.prototype.takeMeasurement = function (callback) {
@@ -26,6 +27,9 @@ MeasurementService.prototype.takeMeasurement = function (callback) {
                 self._airPressureSensorService.readSensorValues(function (airPressureAndTemperatureValue) {
                     airPressureSensorResultCallback(null, airPressureAndTemperatureValue);
                 });
+            },
+            cameraSensorValue: function () {
+                self._cameraSensorService.readSensorValue();
             }
         },
         function (error, sensorValues) {
