@@ -28,8 +28,10 @@ MeasurementService.prototype.takeMeasurement = function (callback) {
                     airPressureSensorResultCallback(null, airPressureAndTemperatureValue);
                 });
             },
-            cameraSensorValue: function () {
-                self._cameraSensorService.readSensorValue();
+            cameraSensorValue: function (cameraSensorResultCallback) {
+                self._cameraSensorService.readSensorValue('photo_' + Date.now() + '.jpg', function (cameraPhotoPath, error) {
+                    cameraSensorResultCallback(error, cameraPhotoPath);
+                });
             }
         },
         function (error, sensorValues) {
@@ -38,7 +40,7 @@ MeasurementService.prototype.takeMeasurement = function (callback) {
                     .concat(sensorValues.humiditySensorValues)
                     .concat(sensorValues.airPressureSensorValues);
 
-                callback(allSensorValues);
+                callback(allSensorValues, sensorValues.cameraSensorValue);
             }
         }
     );

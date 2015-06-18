@@ -7,7 +7,7 @@
 
     MeasurementResource.$inject = ['$resource'];
     function MeasurementResource($resource) {
-        return $resource('http://localhost\:8080/measurements/:id',
+        return $resource('http://10.0.0.10\:8080/measurements/:id',
             {
                 id: '@_id'
             },

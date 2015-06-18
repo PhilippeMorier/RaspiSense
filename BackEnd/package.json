@@ -20,10 +20,10 @@
     "async": "^0.9.2",
     "bh1750": "file:packages\\bh1750",
     "bmp085": "file:packages\\bmp085",
+    "camerapi": "^0.1.0",
     "i2c": "^0.2.1",
     "mongoose": "^4.0.2",
     "node-dht-sensor": "0.0.7",
-    "raspicam": "^0.2.13",
     "restify": "^3.0.2"
   }
 }

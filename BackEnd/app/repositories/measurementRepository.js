@@ -7,7 +7,7 @@ function MeasurementRepository() {
     self = this;
 }
 
-MeasurementRepository.prototype.saveMeasurement = function (sensorValues) {
+MeasurementRepository.prototype.saveMeasurement = function (sensorValues, cameraPhotoPath) {
     var toSaveMeasurementModel = new MeasurementModel({
         sensorValues: sensorValues
     });
@@ -17,6 +17,8 @@ MeasurementRepository.prototype.saveMeasurement = function (sensorValues) {
             throw error;
         }
     });
+
+    console.log(cameraPhotoPath);
 };
 
 // measurementRepository.getAllMeasurements(function (error, measurements) {};

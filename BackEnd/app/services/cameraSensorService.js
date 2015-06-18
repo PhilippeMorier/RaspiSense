@@ -5,20 +5,11 @@ function CameraSensorService(cameraSensor) {
         throw 'A camera sensor has to be provided.';
     }
     this._cameraSensor = cameraSensor;
-    this._cameraSensor.initialize(function onReadHandler(error, filename) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log('Photo taken: ' + filename);
-        }
-        self._camera.stop(self._processId);
-    });
+    this._cameraSensor.initialize(__dirname + '/../../db/photos');
 }
 
-CameraSensorService.prototype.readSensorValue = function () {
-    console.log('readSensorValue');
-    this._cameraSensor.read('photo.jpg');
+CameraSensorService.prototype.readSensorValue = function (fileName, callback) {
+    this._cameraSensor.read(fileName, callback);
 };
 
 module.exports = CameraSensorService;
