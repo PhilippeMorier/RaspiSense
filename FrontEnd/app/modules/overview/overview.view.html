@@ -9,6 +9,7 @@
             <th>#</th>
             <th>Id</th>
             <th>Taken on</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -16,6 +17,11 @@
             <th scope="row">{{$index + 1}}</th>
             <td><a href="#/measurement/{{measurement._id}}">{{measurement._id}}</a></td>
             <td>{{measurement.takenOn | date: "dd.MM.yyyy 'at' HH:mm"}}</td>
+            <td>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="overviewViewModel.deleteMeasurement(measurement)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>

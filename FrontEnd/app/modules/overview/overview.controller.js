@@ -11,6 +11,7 @@
         var overviewViewModel = this;
         overviewViewModel.title = 'Overview';
         overviewViewModel.measurements = [];
+        overviewViewModel.deleteMeasurement = deleteMeasurement;
 
         activate();
 
@@ -24,6 +25,14 @@
                 overviewViewModel.measurements = measurements;
                 toaster.pop('info', 'overview.controller.js', measurements.length + ' measurements fetched!');
             });
+        }
+
+        function deleteMeasurement(measurement) {
+            measurement.$delete(function () {
+                toaster.pop('success', 'overview.controller.js', 'Measurement deleted!');
+            });
+
+            getAllMeasurements();
         }
     }
 })();
