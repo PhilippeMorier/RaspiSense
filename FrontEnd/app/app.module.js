@@ -15,6 +15,7 @@
 
         // Our modules
         'app.modules.overview',
-        'app.modules.measurement'
+        'app.modules.measurement',
+        'app.modules.chart'
     ]);
 })();
