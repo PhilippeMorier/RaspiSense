@@ -31,7 +31,6 @@ LightSensor.prototype.read = function (callback) {
     if (this._bh1750) {
         this._bh1750.readLight(callback);
     }
-    callback();
 };
 
 module.exports = new LightSensor();

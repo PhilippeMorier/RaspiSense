@@ -12,6 +12,7 @@ var MeasurementService = function (measurementRepository, airPressureSensorServi
 
 MeasurementService.prototype.takeMeasurement = function (callback) {
     var self = this;
+
     async.parallel({
             lightSensorValue: function (lightSensorResultCallback) {
                 self._lightSensorService.readSensorValue(function (lightValue) {
@@ -27,12 +28,12 @@ MeasurementService.prototype.takeMeasurement = function (callback) {
                 self._airPressureSensorService.readSensorValues(function (airPressureAndTemperatureValue) {
                     airPressureSensorResultCallback(null, airPressureAndTemperatureValue);
                 });
-            },
+            }/*,
             cameraSensorValue: function (cameraSensorResultCallback) {
                 self._cameraSensorService.readSensorValue('photo_' + Date.now() + '.jpg', function (cameraPhotoPath, error) {
                     cameraSensorResultCallback(error, cameraPhotoPath);
                 });
-            }
+            }*/
         },
         function (error, sensorValues) {
             if (!error) {
