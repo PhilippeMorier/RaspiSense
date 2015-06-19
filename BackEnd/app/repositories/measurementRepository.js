@@ -17,8 +17,6 @@ MeasurementRepository.prototype.saveMeasurement = function (sensorValues, camera
             throw error;
         }
     });
-
-    console.log(cameraPhotoPath);
 };
 
 // measurementRepository.getAllMeasurements(function (error, measurements) {};

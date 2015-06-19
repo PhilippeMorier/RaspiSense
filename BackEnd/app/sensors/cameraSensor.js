@@ -24,9 +24,7 @@ CameraSensor.prototype.read = function (filename, callback) {
         .width(512)
         .height(384)
         .quality(75)
-        .takePicture(filename, function(file, error) {
-            callback(file, error);
-        });
+        .takePicture(filename, callback);
 };
 
 module.exports = new CameraSensor();
