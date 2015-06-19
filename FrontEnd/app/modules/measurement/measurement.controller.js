@@ -13,8 +13,6 @@
         measurementViewModel.id = $routeParams.id;
         measurementViewModel.comment = [];
         measurementViewModel.measurement = [];
-        measurementViewModel.takeMeasurement = takeMeasurement;
-        measurementViewModel.deleteMeasurement = deleteMeasurement;
         measurementViewModel.updateMeasurementComment = updateMeasurementComment;
 
         activate();
@@ -29,19 +27,6 @@
                 measurementViewModel.measurement = measurement;
                 measurementViewModel.comment = measurementViewModel.measurement.comment;
                 toaster.pop('info', 'measurement.controller.js', 'Measurement fetched!');
-            });
-        }
-
-        function takeMeasurement() {
-            var measurement = new MeasurementResource();
-            measurement.$save(function () {
-                toaster.pop('success', 'measurement.controller.js', 'Measurement taken!');
-            });
-        }
-
-        function deleteMeasurement() {
-            measurementViewModel.measurement.$delete(function () {
-                toaster.pop('success', 'measurement.controller.js', 'Measurement deleted!');
             });
         }
 

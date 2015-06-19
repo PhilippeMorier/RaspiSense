@@ -6,11 +6,12 @@
         .controller('OverviewController', OverviewController);
 
     OverviewController.$inject = ['$q', 'toaster', 'measurementResource'];
-    function OverviewController($q, toaster, measurementResource) {
+    function OverviewController($q, toaster, MeasurementResource) {
 
         var overviewViewModel = this;
         overviewViewModel.title = 'Overview';
         overviewViewModel.measurements = [];
+        overviewViewModel.takeMeasurement = takeMeasurement;
         overviewViewModel.deleteMeasurement = deleteMeasurement;
 
         activate();
@@ -21,18 +22,24 @@
         }
 
         function getAllMeasurements() {
-            measurementResource.query(function (measurements) {
+            MeasurementResource.query(function (measurements) {
                 overviewViewModel.measurements = measurements;
-                toaster.pop('info', 'overview.controller.js', measurements.length + ' measurements fetched!');
+            });
+        }
+
+        function takeMeasurement() {
+            var measurement = new MeasurementResource();
+            measurement.$save(function () {
+                getAllMeasurements();
+                toaster.pop('success', 'overview.controller.js', 'Measurement taken!');
             });
         }
 
         function deleteMeasurement(measurement) {
             measurement.$delete(function () {
+                getAllMeasurements();
                 toaster.pop('success', 'overview.controller.js', 'Measurement deleted!');
             });
-
-            getAllMeasurements();
         }
     }
 })();
