@@ -5,18 +5,11 @@
         .module('app.modules.chart')
         .controller('ChartController', ChartController);
 
-    ChartController.$inject = ['$q'];
-    function ChartController($q) {
+    ChartController.$inject = ['$q', 'measurements'];
+    function ChartController($q, measurements) {
 
         var chartViewModel = this;
         chartViewModel.title = 'Chart';
-
-        activate();
-
-        function activate() {
-            var promises = [];
-            return $q.all(promises);
-        }
-
+        chartViewModel.measurements = measurements;
     }
 })();

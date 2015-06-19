@@ -11,7 +11,12 @@
             .when('/chart', {
                 templateUrl: 'app/modules/chart/chart.view.html',
                 controller: 'ChartController',
-                controllerAs: 'chartViewModel'
+                controllerAs: 'chartViewModel',
+                resolve: {
+                    measurements: function (measurementResource) {
+                        return measurementResource.query();
+                    }
+                }
             })
             .otherwise({
                 redirectTo: '/'
