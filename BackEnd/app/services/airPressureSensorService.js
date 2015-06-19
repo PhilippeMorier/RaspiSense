@@ -13,7 +13,7 @@ AirPressureSensorService.prototype.readSensorValues = function (callback) {
             {
                 typeLabel: 'Temperature',
                 value: data.temperature,
-                unit: '°C',
+                unit: '\u2103',
                 sensorId: 3
             },
             {
