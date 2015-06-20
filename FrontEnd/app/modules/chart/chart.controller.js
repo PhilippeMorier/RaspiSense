@@ -17,11 +17,13 @@
             title: {
                 text: 'Sensor Values'
             },
+            /*tooltip: {
+                shared: true,
+                shadow: false
+            },*/
             xAxis: {
-                type: 'datetime'
-                //tickInterval: 36e5,
-                //minorTickInterval: 36e5 / 2,
-                //gridLineWidth: 1
+                //type: 'datetime',
+                crosshair: true
             },
             yAxis: [
                 {
@@ -29,7 +31,10 @@
                         text: 'Temperature'
                     },
                     labels: {
-                        format: '{value}\u00B0C'
+                        format: '{value} \u00B0C',
+                        style: {
+                            color: Highcharts.getOptions().colors[3]
+                        }
                     }
                 },
                 {
@@ -37,7 +42,10 @@
                         text: 'Air Pressure'
                     },
                     labels: {
-                        format: '{value}hPa'
+                        format: '{value} hPa',
+                        style: {
+                            color: Highcharts.getOptions().colors[4]
+                        }
                     },
                     opposite: true
                 }
@@ -46,13 +54,25 @@
                 {
                     yAxis: 0,
                     name: 'Temperature',
+                    type: 'spline',
+                    tooltip: {
+                        valueSuffix: ' \u00B0C'
+                    },
                     data: getAllSensorValuesOfMeasurementLabel('Temperature')
                 },
                 {
                     yAxis: 1,
                     name: 'Air Pressure',
-                    data: getAllSensorValuesOfMeasurementLabel('Air Pressure'),
-                    opposite: true
+                    opposite: true,
+                    dashStyle: 'shortdot',
+                    type: 'spline',
+                    tooltip: {
+                        valueSuffix: ' hPa'
+                    },
+                    marker: {
+                        enabled: false
+                    },
+                    data: getAllSensorValuesOfMeasurementLabel('Air Pressure')
                 }
             ]
         };
