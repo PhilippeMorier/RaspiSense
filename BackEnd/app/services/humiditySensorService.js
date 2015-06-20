@@ -13,7 +13,7 @@ HumiditySensorService.prototype.readSensorValues = function (callback) {
             {
                 typeLabel: 'Temperature',
                 value: data.temperature,
-                unit: '\u2103',
+                unit: '\u00B0C',
                 sensorId: 2
             },
             {
