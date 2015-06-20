@@ -13,8 +13,8 @@ AirPressureSensorMock.prototype.isInitialized = function () {
 
 AirPressureSensorMock.prototype.read = function (callback) {
     callback({
-        pressure: 1013,
-        temperature: 20
+        pressure: 1000 + (20 * Math.sin(Date.now())),
+        temperature: 20 + (10 * Math.sin(Date.now() + 10))
     });
 };
 

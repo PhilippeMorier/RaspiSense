@@ -12,7 +12,7 @@ LightSensorMock.prototype.isInitialized = function () {
 };
 
 LightSensorMock.prototype.read = function (callback) {
-    callback(122);
+    callback(100 + (20 * Math.sin(Date.now())));
 };
 
 module.exports = new LightSensorMock();

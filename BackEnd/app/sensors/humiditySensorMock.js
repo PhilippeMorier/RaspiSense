@@ -13,8 +13,8 @@ HumiditySensorMock.prototype.isInitialized = function () {
 
 HumiditySensorMock.prototype.read = function (callback) {
     callback({
-        humidity: 71,
-        temperature: 21
+        humidity: 70 + (20 * Math.sin(Date.now())),
+        temperature: 20 + (10 * Math.sin(Date.now() + 10))
     });
 };
 
