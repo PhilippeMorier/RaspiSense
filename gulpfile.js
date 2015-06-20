@@ -54,7 +54,7 @@ gulp.task('concat', function () {
         .pipe(concat('js/app.concat.js'))
         .pipe(gulp.dest(paths.frontEndDist));
 
-    gulp.src('./FrontEnd/css/**/*.css')
+    return gulp.src('./FrontEnd/css/**/*.css')
         .pipe(concat('css/app.concat.css'))
         .pipe(gulp.dest(paths.frontEndDist));
 });
