@@ -1,8 +1,6 @@
 <div>
     <div class="col-sm-12">
         <h1>{{chartViewModel.title}}</h1>
-        <div data-ng-repeat="measurement in chartViewModel.measurements">
-            {{measurement.takenOn}}
-        </div>
+        <highchart id="sensorChart" config="chartViewModel.sensorChartConfig"></highchart>
     </div>
 </div>

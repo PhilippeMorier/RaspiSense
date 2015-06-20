@@ -6,6 +6,7 @@
         'ngRoute',
         'ngResource',
         'toaster',
+        'highcharts-ng',
 
         // Our services
         //'app.services',
