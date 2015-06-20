@@ -13,13 +13,16 @@
                 controller: 'ChartController',
                 controllerAs: 'chartViewModel',
                 resolve: {
-                    measurements: function (measurementResource) {
-                        return measurementResource.query();
-                    }
+                    measurements: measurementPreperationResource
                 }
             })
             .otherwise({
                 redirectTo: '/'
             });
+    }
+
+    measurementPreperationResource.$inject = ['measurementResource'];
+    function measurementPreperationResource(measurementResource) {
+        return measurementResource.query().$promise;
     }
 })();
