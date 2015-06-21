@@ -11,16 +11,17 @@
         var chartViewModel = this;
         chartViewModel.title = 'Chart';
         chartViewModel.sensorChartConfig = {
-            chart: {
-                type: 'bar'
+            options: {
+                chart: {
+                    zoomType: 'xy'
+                },
+                tooltip: {
+                    shared: true
+                }
             },
             title: {
                 text: 'Sensor Values'
             },
-            /*tooltip: {
-                shared: true,
-                shadow: false
-            },*/
             xAxis: {
                 //type: 'datetime',
                 crosshair: true
@@ -48,17 +49,30 @@
                         }
                     },
                     opposite: true
+                },
+                {
+                    title: {
+                        text: 'Light'
+                    },
+                    labels: {
+                        format: '{value} Lux',
+                        style: {
+                            color: Highcharts.getOptions().colors[6]
+                        }
+                    },
+                    opposite: true
                 }
             ],
             series: [
                 {
-                    yAxis: 0,
-                    name: 'Temperature',
-                    type: 'spline',
+                    yAxis: 2,
+                    name: 'Light',
+                    type: 'column',
+                    color: Highcharts.getOptions().colors[6],
+                    data: getAllSensorValuesOfMeasurementLabel('Light'),
                     tooltip: {
-                        valueSuffix: ' \u00B0C'
-                    },
-                    data: getAllSensorValuesOfMeasurementLabel('Temperature')
+                        valueSuffix: ' Lux'
+                    }
                 },
                 {
                     yAxis: 1,
@@ -66,6 +80,7 @@
                     opposite: true,
                     dashStyle: 'shortdot',
                     type: 'spline',
+                    color: Highcharts.getOptions().colors[4],
                     tooltip: {
                         valueSuffix: ' hPa'
                     },
@@ -73,6 +88,19 @@
                         enabled: false
                     },
                     data: getAllSensorValuesOfMeasurementLabel('Air Pressure')
+                },
+                {
+                    yAxis: 0,
+                    name: 'Temperature',
+                    type: 'spline',
+                    color: Highcharts.getOptions().colors[3],
+                    tooltip: {
+                        valueSuffix: ' \u00B0C'
+                    },
+                    marker: {
+                        enabled: false
+                    },
+                    data: getAllSensorValuesOfMeasurementLabel('Temperature')
                 }
             ]
         };
