@@ -5,6 +5,7 @@ var SensorInterface = require('../sensors/sensorInterface');
 function HumiditySensorService(humiditySensor) {
     SensorInterface.ensureItGetsImplementedBy(humiditySensor);
     this._humiditySensor = humiditySensor;
+    this._humiditySensor.initialize();
 }
 
 HumiditySensorService.prototype.readSensor = function (callback) {

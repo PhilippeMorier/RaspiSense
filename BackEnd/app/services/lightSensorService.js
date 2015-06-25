@@ -4,7 +4,8 @@ var SensorInterface = require('../sensors/sensorInterface');
 
 function LightSensorService(lightSensor) {
     SensorInterface.ensureItGetsImplementedBy(lightSensor);
-    this._airPressureSensor = lightSensor;
+    this._lightSensor = lightSensor;
+    this._lightSensor.initialize();
 }
 
 LightSensorService.prototype.readSensor = function (callback) {

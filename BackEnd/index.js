@@ -12,16 +12,9 @@ var SensorInterface = require('./app/sensors/sensorInterface');
 var isWindowsPlatform = /^win/.test(process.platform);
 
 var humiditySensor = isWindowsPlatform ? require('./app/sensors/humiditySensorMock') : require('./app/sensors/humiditySensor');
-SensorInterface.ensureItGetsImplementedBy(humiditySensor);
-humiditySensor.initialize();
-
 var lightSensor = isWindowsPlatform ? require('./app/sensors/lightSensorMock') : require('./app/sensors/lightSensor');
-SensorInterface.ensureItGetsImplementedBy(lightSensor);
-lightSensor.initialize();
-
 var airPressureSensor = isWindowsPlatform ? require('./app/sensors/airPressureSensorMock') : require('./app/sensors/airPressureSensor');
-SensorInterface.ensureItGetsImplementedBy(airPressureSensor);
-airPressureSensor.initialize();
+var cameraSensor = require('./app/sensors/cameraSensor');
 
 mongoose.connect('mongodb://127.0.0.1:8910/RaspiSenseDatabase', function (error) {
     if (error) {
@@ -29,22 +22,16 @@ mongoose.connect('mongodb://127.0.0.1:8910/RaspiSenseDatabase', function (error)
     }
 });
 
-var cameraSensor = require('./app/sensors/cameraSensor');
+var measurementRepository = new MeasurementRepository();
+var lightSensorService = new LightSensorService(lightSensor);
+var humiditySensorService = new HumiditySensorService(humiditySensor);
+var airPressureSensorService = new AirPressureSensorService(airPressureSensor);
+var cameraService = new CameraService(cameraSensor);
 
-if (humiditySensor.isInitialized() && lightSensor.isInitialized() && airPressureSensor.isInitialized()) {
+var measurementService = new MeasurementService(measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService, cameraService);
+var routingService = new RoutingService(measurementService, measurementRepository);
 
-    var measurementRepository = new MeasurementRepository();
-
-    var lightSensorService = new LightSensorService(lightSensor);
-    var humiditySensorService = new HumiditySensorService(humiditySensor);
-    var airPressureSensorService = new AirPressureSensorService(airPressureSensor);
-    var cameraService = new CameraService(cameraSensor);
-
-    var measurementService = new MeasurementService(measurementRepository, airPressureSensorService, humiditySensorService, lightSensorService, cameraService);
-    var routingService = new RoutingService(measurementService, measurementRepository);
-
-    routingService.initialize();
-    routingService.startListen();
-}
+routingService.initialize();
+routingService.startListen();
 
 //mongoose.connection.close();
