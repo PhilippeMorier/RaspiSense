@@ -1,14 +1,15 @@
 'use strict';
 
 function HumiditySensorMock() {
+    this._isInitialized = false;
 }
 
 HumiditySensorMock.prototype.initialize = function () {
-
+    this._isInitialized = true;
 };
 
 HumiditySensorMock.prototype.isInitialized = function () {
-    return true;
+    return this._isInitialized;
 };
 
 HumiditySensorMock.prototype.read = function (callback) {

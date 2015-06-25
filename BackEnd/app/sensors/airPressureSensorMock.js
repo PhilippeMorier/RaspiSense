@@ -1,14 +1,15 @@
 'use strict';
 
 function AirPressureSensorMock() {
+    this._isInitialized = false;
 }
 
 AirPressureSensorMock.prototype.initialize = function () {
-
+    this._isInitialized = true;
 };
 
 AirPressureSensorMock.prototype.isInitialized = function () {
-    return true;
+    return this._isInitialized;
 };
 
 AirPressureSensorMock.prototype.read = function (callback) {
