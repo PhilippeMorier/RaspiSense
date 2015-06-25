@@ -1,13 +1,13 @@
 'use strict';
 
+var SensorInterface = require('../sensors/sensorInterface');
+
 function HumiditySensorService(humiditySensor) {
-    if (!humiditySensor) {
-        throw 'A humidity sensor has to be provided.';
-    }
+    SensorInterface.ensureItGetsImplementedBy(humiditySensor);
     this._humiditySensor = humiditySensor;
 }
 
-HumiditySensorService.prototype.readSensorValues = function (callback) {
+HumiditySensorService.prototype.readSensor = function (callback) {
     this._humiditySensor.read(function (data) {
         var sensorValues = [
             {

@@ -1,13 +1,14 @@
 'use strict';
 
+var SensorInterface = require('../sensors/sensorInterface');
+
 function AirPressureSensorService(airPressureSensor) {
-    if(!airPressureSensor) {
-        throw 'A air pressure sensor has to be provided.';
-    }
+    SensorInterface.ensureItGetsImplementedBy(airPressureSensor);
     this._airPressureSensor = airPressureSensor;
+    this._airPressureSensor.initialize();
 }
 
-AirPressureSensorService.prototype.readSensorValues = function (callback) {
+AirPressureSensorService.prototype.readSensor = function (callback) {
     this._airPressureSensor.read(function (data) {
         var sensorValues = [
             {

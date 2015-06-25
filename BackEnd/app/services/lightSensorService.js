@@ -1,13 +1,13 @@
 'use strict';
 
+var SensorInterface = require('../sensors/sensorInterface');
+
 function LightSensorService(lightSensor) {
-    if (!lightSensor) {
-        throw 'A light sensor has to be provided.';
-    }
+    SensorInterface.ensureItGetsImplementedBy(lightSensor);
     this._airPressureSensor = lightSensor;
 }
 
-LightSensorService.prototype.readSensorValue = function (callback) {
+LightSensorService.prototype.readSensor = function (callback) {
     this._airPressureSensor.read(function (value) {
         var sensorValue = {
             typeLabel: 'Light',
