@@ -5,8 +5,8 @@
         .module('app.modules.chart')
         .controller('ChartController', ChartController);
 
-    ChartController.$inject = ['$q', 'measurements'];
-    function ChartController($q, measurements) {
+    ChartController.$inject = ['$q', 'measurements', 'dateFilter'];
+    function ChartController($q, measurements, dateFilter) {
 
         var chartViewModel = this;
         chartViewModel.title = 'Chart';
@@ -23,7 +23,6 @@
                 text: 'Sensor Values'
             },
             xAxis: {
-                //type: 'datetime',
                 crosshair: true
             },
             yAxis: [
@@ -64,6 +63,10 @@
                 }
             ],
             series: [
+                {
+                    xAxis: 0,
+                    data: [1434888559, 1434888599]
+                },
                 {
                     yAxis: 2,
                     name: 'Light',
@@ -113,7 +116,12 @@
                 for (var is = 0; is < measurement.sensorValues.length; is++) {
                     var sensorValue = measurement.sensorValues[is];
                     if (sensorValue.typeLabel === String(typeLabel)) {
-                        sensorValues.push(sensorValue.value);
+                        sensorValues.push(
+                            {
+                                y: sensorValue.value,
+                                name: dateFilter(measurement.takenOn, 'dd.MM.yyyy \'at\' HH:mm')
+                            }
+                        );
                         break;
                     }
                 }
