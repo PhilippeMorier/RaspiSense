@@ -9,7 +9,11 @@ function LightSensorService(lightSensor) {
 }
 
 LightSensorService.prototype.readSensor = function (callback) {
-    this._airPressureSensor.read(function (value) {
+    if (!this._lightSensor.isInitialized()) {
+        throw 'Light sensor is not initialized!';
+    }
+
+    this._lightSensor.read(function (value) {
         var sensorValue = {
             typeLabel: 'Light',
             value: value,

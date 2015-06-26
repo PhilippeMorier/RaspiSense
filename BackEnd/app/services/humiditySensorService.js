@@ -9,6 +9,10 @@ function HumiditySensorService(humiditySensor) {
 }
 
 HumiditySensorService.prototype.readSensor = function (callback) {
+    if (!this._humiditySensor.isInitialized()) {
+        throw 'Humidity sensor is not initialized!';
+    }
+
     this._humiditySensor.read(function (data) {
         var sensorValues = [
             {

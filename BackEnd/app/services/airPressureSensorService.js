@@ -9,6 +9,10 @@ function AirPressureSensorService(airPressureSensor) {
 }
 
 AirPressureSensorService.prototype.readSensor = function (callback) {
+    if (!this._airPressureSensor.isInitialized()) {
+        throw 'Air pressure sensor is not initialized!';
+    }
+
     this._airPressureSensor.read(function (data) {
         var sensorValues = [
             {
