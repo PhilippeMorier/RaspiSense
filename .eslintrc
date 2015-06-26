@@ -17,6 +17,7 @@
     "no-underscore-dangle": false
   },
   "globals": {
-    "angular": true
+    "angular": true,
+    "Highcharts": true
   }
 }
