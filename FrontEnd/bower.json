@@ -33,6 +33,17 @@
         "dist/fonts/glyphicons-halflings-regular.woff",
         "dist/fonts/glyphicons-halflings-regular.woff2"
       ]
+    },
+    "highcharts-release": {
+      "main": [
+        "standalone-framework.src.js",
+        "highcharts.src.js"
+      ]
+    },
+    "highcharts-ng": {
+      "main": [
+        "src/highcharts-ng.js"
+      ]
     }
   },
   "dependencies": {
