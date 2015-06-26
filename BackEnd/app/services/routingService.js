@@ -47,8 +47,8 @@ RoutingService.prototype.initialize = function () {
     });
 
     self._server.post('/measurements', function (request, response, next) {
-        self._measurementService.takeMeasurement(function (sensorValues, cameraPhotoPath) {
-            self._measurementRepository.saveMeasurement(sensorValues, cameraPhotoPath);
+        self._measurementService.takeMeasurement(function (sensorValues) {
+            self._measurementRepository.saveMeasurement(sensorValues);
             response.send('Measurement was taken!');
         });
 
